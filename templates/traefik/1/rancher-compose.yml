@@ -133,10 +133,12 @@
       required: true
       default: 60 
       type: "int"
+
 traefik:
   retain_ip: true
+  default_cert: ${ssl_cert}
   health_check:
-    port: 8000
+    port: ${admin_port}
     interval: 5000
     unhealthy_threshold: 3
     request_line: 'GET /dashboard/# HTTP/1.0'
