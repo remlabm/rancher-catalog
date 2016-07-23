@@ -136,14 +136,13 @@
 
 traefik:
   retain_ip: true
-  default_cert: ${ssl_cert}
-  health_check:
-    port: ${admin_port}
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: 'GET /dashboard/# HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 5000
+#  health_check:
+#    port: ${admin_port}
+#    interval: 5000
+#    unhealthy_threshold: 3
+#    request_line: 'GET /dashboard/# HTTP/1.0'
+#    healthy_threshold: 2
+#    response_timeout: 5000
   metadata:
     traefik:
       ssl_key: |
