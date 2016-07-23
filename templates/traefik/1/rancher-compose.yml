@@ -133,16 +133,23 @@
       required: true
       default: 60 
       type: "int"
+    - variable: "ssl_cert"
+      description: "SSL certificate"
+      label: "SSL certificate:"
+      required: false
+      default: ""
+      type: "certificate"
 
 traefik:
   retain_ip: true
-#  health_check:
-#    port: ${admin_port}
-#    interval: 5000
-#    unhealthy_threshold: 3
-#    request_line: 'GET /dashboard/# HTTP/1.0'
-#    healthy_threshold: 2
-#    response_timeout: 5000
+  default_cert: ${ssl_cert}
+  health_check:
+    port: ${admin_port}
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET /dashboard/# HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 5000
   metadata:
     traefik:
       ssl_key: |
