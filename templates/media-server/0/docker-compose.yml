@@ -50,7 +50,7 @@ plex-proxy:
     VIRTUAL_HOST: plex.${hostname}.${domain}
     VIRTUAL_PORT: ${PLEX_PORT}
   labels:
-    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: ${host_label}
   tty: true
   image: remlabm/nginx-plex-proxy
   stdin_open: true
