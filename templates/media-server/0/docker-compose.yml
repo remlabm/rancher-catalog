@@ -45,26 +45,23 @@ plex-config:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
     io.rancher.scheduler.affinity:host_label: ${host_label}
-#plex-proxy:
-#  environment:
-#    VIRTUAL_HOST: plex.${hostname}.${domain}
-#    VIRTUAL_PORT: ${PLEX_PORT}
-#  labels:
-#    io.rancher.scheduler.affinity:host_label: ${host_label}
-#  links:
-#    - plex-ext:plex-ext
-#  tty: true
-#  image: remlabm/nginx-plex-proxy
-#  stdin_open: true
-#  command:
-#    - /bin/sh
-#    - -c
-#    - "until (getent hosts plex-ext); do echo 'waiting on plex-ext'; sleep 0.5; done &&
-#      exec nginx"
-#
-#plex-ext:
-#  image: rancher/external-service
-#
+plex-proxy:
+  environment:
+    VIRTUAL_HOST: plex.${hostname}.${domain}
+    VIRTUAL_PORT: ${PLEX_PORT}
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+  tty: true
+  image: remlabm/nginx-plex-proxy
+  stdin_open: true
+  command:
+    - /bin/sh
+    - -c
+    - "until (getent hosts plex-ext); do echo 'waiting on plex-ext'; sleep 0.5; done &&
+      exec nginx"
+plex-ext:
+  image: rancher/external-service
+
 sabnzbd:
   image: timhaak/sabnzbd
   environment:
