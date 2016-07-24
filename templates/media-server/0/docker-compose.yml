@@ -3,7 +3,7 @@ nginxproxy:
   ports:
     - "80:80"
   volumes:
-    - "/var/run/docker.sock:/tmp/docker.sock"
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
 
@@ -30,7 +30,7 @@ plex:
     -  plex-config
   environment:
     VIRTUAL_HOST: plex.${hostname}.${domain}
-    VIRTUAL_PORT: 8080
+    VIRTUAL_PORT: 32400
   net: ${NET}
 plex-config:
   image: busybox
