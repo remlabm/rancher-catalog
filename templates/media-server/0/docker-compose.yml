@@ -1,0 +1,126 @@
+plex:
+  image: timhaak/plex
+  labels:
+    io.rancher.sidekicks: plex-config
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+  ports:
+    - ${PLEX_PORT}:32400
+    - "3005:3005"
+    - "8324:8324"
+    - "32469:32469"
+    - "5353:5353/udp"
+    - "1900:1900/udp"
+    - "32410:32410/udp"
+    - "32412:32412/udp"
+    - "32413:32413/udp"
+    - "32414:32414/udp"
+  volumes:
+    - ${PATHMEDIA}:/data
+  volumes_from:
+    -  plex-config
+  environment:
+    VIRTUAL_HOST: plex.${domain}
+    VIRTUAL_PORT: 8080
+  net: ${NET}
+plex-config:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+    - /config
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+
+sabnzbd:
+  image: timhaak/sabnzbd
+  environment:
+    VIRTUAL_HOST: sabnzbd.${domain}
+    VIRTUAL_PORT: 8080
+  volumes:
+    - ${PATHMEDIA}:/data
+  volumes_from:
+    - sabnzbd-config
+  labels:
+    io.rancher.sidekicks: sabnzbd-config
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+sabnzbd-data:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+    - /config
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+#
+#sickbeard:
+#  image: timhaak/sickbeard
+#  environment:
+#    VIRTUAL_HOST: sickbeard.${domain}
+#    VIRTUAL_PORT: 8080
+#  volumes:
+#    - ${PATHMEDIA}:/data
+#  volumes_from:
+#    - sickbeard-config
+#  labels:
+#    io.rancher.sidekicks: sabnzbd-config
+#    io.rancher.scheduler.affinity:host_label: ${host_label}
+#sickbeard-data:
+#  image: busybox
+#  command: /bin/true
+#  net: none
+#  volumes:
+#    - /config
+#  labels:
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.container.start_once: true
+#    io.rancher.scheduler.affinity:host_label: ${host_label}
+
+sonarr:
+  image: binhex/arch-sonarr
+  environment:
+    VIRTUAL_HOST: sickbeard.${domain}
+    VIRTUAL_PORT: 8989
+  volumes:
+    - ${PATHMEDIA}:/data
+  volumes_from:
+    - sickbeard-config
+  labels:
+    io.rancher.sidekicks: sabnzbd-config
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+sonarr-config:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+    - /config
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+
+couchpotato:
+  image: timhaak/couchpotato
+  environment:
+    VIRTUAL_HOST: couchpotato.${domain}
+    VIRTUAL_PORT: 5050
+  volumes:
+    - ${PATHMEDIA}:/data
+  volumes_from:
+    - couchpotato-config
+  labels:
+    io.rancher.sidekicks: couchpotato-config
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+couchpotato-config:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+    - /config
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: ${host_label}
