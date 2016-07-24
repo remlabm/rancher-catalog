@@ -145,11 +145,13 @@ traefik:
   default_cert: ${ssl_cert}
   health_check:
     port: ${admin_port}
-    interval: 5000
+    interval: 2000
     unhealthy_threshold: 3
-    request_line: 'GET /dashboard/# HTTP/1.0'
+    request_line: ''
     healthy_threshold: 2
+    initializing_timeout: 60000
     response_timeout: 5000
+    strategy: none
   metadata:
     traefik:
       ssl_key: |
