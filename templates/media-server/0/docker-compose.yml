@@ -51,6 +51,8 @@ plex-proxy:
     VIRTUAL_PORT: ${PLEX_PORT}
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
+  links:
+    - plex-ext:plex-ext
   tty: true
   image: remlabm/nginx-plex-proxy
   stdin_open: true
