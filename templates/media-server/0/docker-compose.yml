@@ -87,7 +87,7 @@ sonarr:
   volumes:
     - ${PATHMEDIA}:/data
   volumes_from:
-    - sickbeard-config
+    - sonarr-config
   labels:
     io.rancher.sidekicks: sonarr-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
