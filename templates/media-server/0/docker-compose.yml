@@ -95,7 +95,7 @@ sabnzbd-config:
 sonarr:
   image: binhex/arch-sonarr
   environment:
-    VIRTUAL_HOST: sickbeard.${hostname}.${domain}
+    VIRTUAL_HOST: sonarr.${hostname}.${domain}
     VIRTUAL_PORT: 8989
   volumes:
     - ${PATHMEDIA}:/data
