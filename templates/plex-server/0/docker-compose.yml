@@ -3,10 +3,6 @@ plex:
   labels:
     io.rancher.sidekicks: plex-data
     io.rancher.scheduler.affinity:host_label: ${host_label}
-  environment:
-    - VERSION=latest
-    - PUID=${PUID}
-    - PGID=${PGID}
   ports:
     - ${PORT}:32400
     - "3005:3005"
@@ -34,9 +30,7 @@ plex-data:
   command: /bin/true
   net: none
   volumes:
-    - /var/run
-    - /var/lib/glusterd
-    - /data/glusterfs/brick1
+    - /data
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
