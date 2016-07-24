@@ -1,22 +1,22 @@
 .catalog:
-    name: "Convoy NFS"
-    version: "v0.4.0"
-    description: "Convoy NFS - Docker volume plugin"
-    questions:
-     - variable: "NFS_SERVER"
-       description: "IP or hostname of the NFS Server"
-       label: "NFS Server"
-       required: true
-       type: "string"
-     - variable: "MOUNT_DIR"
-       label: "Mount Directory"
-       description: "The directory on the NFS server to mount"
-       type: "string"
-       required: true
-     - variable: "MOUNT_OPTS"
-       label: "Mount Options"
-       description: "Comma delimited list of mount options, for example: 'nfsvers=4,proto=udp'"
-       type: "string"
+  name: "Convoy NFS"
+  version: "v0.4.0"
+  description: "Convoy NFS - Docker volume plugin"
+  questions:
+    - variable: "NFS_SERVER"
+      description: "IP or hostname of the NFS Server"
+      label: "NFS Server"
+      required: true
+      type: "string"
+    - variable: "MOUNT_DIR"
+      label: "Mount Directory"
+      description: "The directory on the NFS server to mount"
+      type: "string"
+      required: true
+    - variable: "MOUNT_OPTS"
+      label: "Mount Options"
+      description: "Comma delimited list of mount options, for example: 'nfsvers=4,proto=udp'"
+      type: "string"
     - variable: "host_label"
       description: "Host label where to run NFS service."
       label: "Host label:"
