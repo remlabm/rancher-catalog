@@ -15,6 +15,11 @@
       required: true
       default: "media-stack=true"
       type: "string"
+    - variable: "PATHMEDIA"
+      type: "string"
+      label: "Media Path"
+      description: the Path to your library (/media, or a nfs mount /mnt, ...)
+      default: '/media'
     - variable: "PLEX_PORT"
       type: "string"
       label: "Plex Port"
