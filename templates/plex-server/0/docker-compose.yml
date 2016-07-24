@@ -1,0 +1,44 @@
+plex:
+  image: timhaak/plex
+  labels:
+    io.rancher.sidekicks: plex-data
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+  environment:
+    - VERSION=latest
+    - PUID=${PUID}
+    - PGID=${PGID}
+  ports:
+    - ${PORT}:32400
+    - "3005:3005"
+    - "8324:8324"
+    - "32469:32469"
+    - "5353:5353/udp"
+    - "1900:1900/udp"
+    - "32410:32410/udp"
+    - "32412:32412/udp"
+    - "32413:32413/udp"
+    - "32414:32414/udp"
+  volumes:
+    - ${PATHMEDIA}:/data
+  volumes_from:
+    -  plex-data
+  net: ${NET}
+
+
+#
+# WARNING -- DO NOT CHANGE ANYTHING BELOW
+# DATA LOSS!!!! CAN OCCURR DURING UPGRADE
+#
+plex-data:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+    - /var/run
+    - /var/lib/glusterd
+    - /data/glusterfs/brick1
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+
