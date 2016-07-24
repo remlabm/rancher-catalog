@@ -41,5 +41,15 @@
         - none
       required: true
       default: "host"
+    - variable: "plex_ext_ip"
+      description: "External IP of Plex"
+      label: "External IP:"
+      required: false
+      default: "10.0.25.201"
+      type: "string"
 plex:
   scale: 1
+
+plex-ext:
+  external_ips:
+  - ${plex_ext_ip}

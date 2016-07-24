@@ -33,7 +33,7 @@ plex:
     -  plex-config
   environment:
     VIRTUAL_HOST: plex.${hostname}.${domain}
-    VIRTUAL_PORT: 32400
+    VIRTUAL_PORT: ${PLEX_PORT}
   net: ${NET}
 plex-config:
   image: busybox
@@ -45,6 +45,15 @@ plex-config:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
     io.rancher.scheduler.affinity:host_label: ${host_label}
+plex-proxy:
+  environment:
+    VIRTUAL_HOST: plex.${hostname}.${domain}
+    VIRTUAL_PORT: ${PLEX_PORT}
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: remlabm/nginx-plex-proxy
+  stdin_open: true
 
 sabnzbd:
   image: timhaak/sabnzbd
