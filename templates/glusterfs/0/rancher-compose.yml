@@ -23,15 +23,15 @@
         - "container:glusterfs-server"
         - "host"
     - variable: "host_label"
-      description: "Host label where to run NFS service."
+      description: "Host label where to run Gluster service."
       label: "Host label:"
       required: true
-      default: "nfs-convoy=true"
+      default: "glusterfs=true"
       type: "string"
 
 
 glusterfs-server:
-  scale: 2
+  scale: 3
   retain_ip: true
   metadata:
     volume_name: "${VOLUME_NAME}"
