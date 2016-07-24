@@ -1,5 +1,5 @@
 nginxproxy:
-  image: jwilder/nginx-proxy
+  image: remlabm/nginx-proxy
   ports:
     - "80:80"
   volumes:
