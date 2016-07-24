@@ -17,6 +17,7 @@ convoy-nfs:
 convoy-nfs-storagepool:
   labels:
     io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.affinity:host_label: ${host_label}
   image: rancher/convoy-agent:v0.9.0
   volumes:
     - /var/run:/host/var/run
