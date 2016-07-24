@@ -13,6 +13,9 @@ plex:
     io.rancher.sidekicks: plex-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: ${hostname}
+    traefik.enable: true
+    traefik.domain: ${domain}
+    traefik.port: 32400
   ports:
     - ${PLEX_PORT}:32400
     - "3005:3005"
@@ -55,6 +58,9 @@ sabnzbd:
   labels:
     io.rancher.sidekicks: sabnzbd-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
+    traefik.enable: true
+    traefik.domain: ${domain}
+    traefik.port: 8080
 sabnzbd-config:
   image: busybox
   command: /bin/true
@@ -101,6 +107,9 @@ sonarr:
   labels:
     io.rancher.sidekicks: sonarr-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
+    traefik.enable: true
+    traefik.domain: ${domain}
+    traefik.port: 8989
 sonarr-config:
   image: busybox
   command: /bin/true
@@ -124,6 +133,9 @@ couchpotato:
   labels:
     io.rancher.sidekicks: couchpotato-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
+    traefik.enable: true
+    traefik.domain: ${domain}
+    traefik.port: 5050
 couchpotato-config:
   image: busybox
   command: /bin/true
