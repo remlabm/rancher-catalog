@@ -17,12 +17,11 @@
        label: "Mount Options"
        description: "Comma delimited list of mount options, for example: 'nfsvers=4,proto=udp'"
        type: "string"
-  questions:
     - variable: "host_label"
-      description: "Host label where to run Prometheus service."
+      description: "Host label where to run NFS service."
       label: "Host label:"
       required: true
-      default: "monitoring=true"
+      default: "nfs-convoy=true"
       type: "string"
 
 convoy-nfs:
