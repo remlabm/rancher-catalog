@@ -59,7 +59,7 @@ plex-proxy:
   command:
     - /bin/sh
     - -c
-    - "until (getent hosts api1); do echo 'waiting on plex-ext'; sleep 0.5; done &&
+    - "until (getent hosts plex-ext); do echo 'waiting on plex-ext'; sleep 0.5; done &&
       exec nginx"
 
 plex-ext:
