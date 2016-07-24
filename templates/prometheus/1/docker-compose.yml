@@ -31,6 +31,9 @@ prometheus:
   labels:
     io.rancher.sidekicks: prom-conf
     io.rancher.scheduler.affinity:host_label: ${host_label}
+    traefik.enable: stack
+    traefik.domain: ${domain}
+    traefik.port: 9090
   volumes_from:
     - prom-conf
   links:
@@ -65,6 +68,9 @@ grafana:
     labels:
       io.rancher.sidekicks: graf-db
       io.rancher.scheduler.affinity:host_label: ${host_label}
+      traefik.enable: stack
+      traefik.domain: ${domain}
+      traefik.port: 3000
     volumes_from:
        - graf-db
     links:
