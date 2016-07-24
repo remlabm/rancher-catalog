@@ -10,7 +10,7 @@ nginxproxy:
 plex:
   image: timhaak/plex
   labels:
-    io.rancher.sidekicks: plex-config
+#    io.rancher.sidekicks: plex-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: ${hostname}
     traefik.enable: true
@@ -28,23 +28,24 @@ plex:
     - "32413:32413/udp"
     - "32414:32414/udp"
   volumes:
-    - ${PATHMEDIA}:/data
-  volumes_from:
-    -  plex-config
+    - ${path_config}/plex:/config
+    - ${path_media}:/data
+#  volumes_from:
+#    -  plex-config
   environment:
     VIRTUAL_HOST: plex.${hostname}.${domain}
     VIRTUAL_PORT: ${PLEX_PORT}
   net: ${NET}
-plex-config:
-  image: busybox
-  command: /bin/true
-  net: none
-  volumes:
-    - /config
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-    io.rancher.scheduler.affinity:host_label: ${host_label}
+#plex-config:
+#  image: busybox
+#  command: /bin/true
+#  net: none
+#  volumes:
+#    - /config
+#  labels:
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.container.start_once: true
+#    io.rancher.scheduler.affinity:host_label: ${host_label}
 plex-proxy:
   environment:
     VIRTUAL_HOST: plex.${hostname}.${domain}
@@ -68,25 +69,26 @@ sabnzbd:
     VIRTUAL_HOST: sabnzbd.${hostname}.${domain}
     VIRTUAL_PORT: 8080
   volumes:
-    - ${PATHMEDIA}:/data
-  volumes_from:
-    - sabnzbd-config
+    - ${path_media}:/data
+    - ${path_config}/sabnzbd:/config
+#  volumes_from:
+#    - sabnzbd-config
   labels:
-    io.rancher.sidekicks: sabnzbd-config
+#    io.rancher.sidekicks: sabnzbd-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
     traefik.enable: true
     traefik.domain: ${domain}
     traefik.port: 8080
-sabnzbd-config:
-  image: busybox
-  command: /bin/true
-  net: none
-  volumes:
-    - /config
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-    io.rancher.scheduler.affinity:host_label: ${host_label}
+#sabnzbd-config:
+#  image: busybox
+#  command: /bin/true
+#  net: none
+#  volumes:
+#    - /config
+#  labels:
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.container.start_once: true
+#    io.rancher.scheduler.affinity:host_label: ${host_label}
 #
 #sickbeard:
 #  image: timhaak/sickbeard
@@ -94,7 +96,7 @@ sabnzbd-config:
 #    VIRTUAL_HOST: sickbeard.${domain}
 #    VIRTUAL_PORT: 8080
 #  volumes:
-#    - ${PATHMEDIA}:/data
+#    - ${path_media}:/data
 #  volumes_from:
 #    - sickbeard-config
 #  labels:
@@ -117,25 +119,26 @@ sonarr:
     VIRTUAL_HOST: sonarr.${hostname}.${domain}
     VIRTUAL_PORT: 8989
   volumes:
-    - ${PATHMEDIA}:/data
-  volumes_from:
-    - sonarr-config
+    - ${path_media}:/data
+    - ${path_config}/sonarr:/config
+#  volumes_from:
+#    - sonarr-config
   labels:
-    io.rancher.sidekicks: sonarr-config
+#    io.rancher.sidekicks: sonarr-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
     traefik.enable: true
     traefik.domain: ${domain}
     traefik.port: 8989
-sonarr-config:
-  image: busybox
-  command: /bin/true
-  net: none
-  volumes:
-    - /config
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-    io.rancher.scheduler.affinity:host_label: ${host_label}
+#sonarr-config:
+#  image: busybox
+#  command: /bin/true
+#  net: none
+#  volumes:
+#    - /config
+#  labels:
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.container.start_once: true
+#    io.rancher.scheduler.affinity:host_label: ${host_label}
 
 couchpotato:
   image: timhaak/couchpotato
@@ -143,22 +146,23 @@ couchpotato:
     VIRTUAL_HOST: couchpotato.${hostname}.${domain}
     VIRTUAL_PORT: 5050
   volumes:
-    - ${PATHMEDIA}:/data
-  volumes_from:
-    - couchpotato-config
+    - ${path_media}:/data
+    - ${path_config}/couchpotato:/config
+#  volumes_from:
+#    - couchpotato-config
   labels:
-    io.rancher.sidekicks: couchpotato-config
+#    io.rancher.sidekicks: couchpotato-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
     traefik.enable: true
     traefik.domain: ${domain}
     traefik.port: 5050
-couchpotato-config:
-  image: busybox
-  command: /bin/true
-  net: none
-  volumes:
-    - /config
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-    io.rancher.scheduler.affinity:host_label: ${host_label}
+#couchpotato-config:
+#  image: busybox
+#  command: /bin/true
+#  net: none
+#  volumes:
+#    - /config
+#  labels:
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.container.start_once: true
+#    io.rancher.scheduler.affinity:host_label: ${host_label}

@@ -24,7 +24,12 @@
       default: "media-stack=true,server=thor"
 #      default: "media-stack=true"
       type: "string"
-    - variable: "PATHMEDIA"
+    - variable: "path_config"
+      type: "string"
+      label: "Media Path"
+      description: the Path to your library (/media, or a nfs mount /mnt, ...)
+      default: '/configs'
+    - variable: "path_media"
       type: "string"
       label: "Media Path"
       description: the Path to your library (/media, or a nfs mount /mnt, ...)
