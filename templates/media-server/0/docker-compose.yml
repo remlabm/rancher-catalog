@@ -1,8 +1,21 @@
+nginxproxy:
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: ${hostname}.${domain}
+  environment:
+    DEFAULT_HOST: plex.${hostname}.${domain}
+
 plex:
   image: timhaak/plex
   labels:
     io.rancher.sidekicks: plex-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: ${hostname}
   ports:
     - ${PLEX_PORT}:32400
     - "3005:3005"
@@ -19,7 +32,7 @@ plex:
   volumes_from:
     -  plex-config
   environment:
-    VIRTUAL_HOST: plex.${domain}
+    VIRTUAL_HOST: plex.${hostname}.${domain}
     VIRTUAL_PORT: 8080
   net: ${NET}
 plex-config:
@@ -36,7 +49,7 @@ plex-config:
 sabnzbd:
   image: timhaak/sabnzbd
   environment:
-    VIRTUAL_HOST: sabnzbd.${domain}
+    VIRTUAL_HOST: sabnzbd.${hostname}.${domain}
     VIRTUAL_PORT: 8080
   volumes:
     - ${PATHMEDIA}:/data
@@ -82,7 +95,7 @@ sabnzbd-config:
 sonarr:
   image: binhex/arch-sonarr
   environment:
-    VIRTUAL_HOST: sickbeard.${domain}
+    VIRTUAL_HOST: sickbeard.${hostname}.${domain}
     VIRTUAL_PORT: 8989
   volumes:
     - ${PATHMEDIA}:/data
@@ -105,7 +118,7 @@ sonarr-config:
 couchpotato:
   image: timhaak/couchpotato
   environment:
-    VIRTUAL_HOST: couchpotato.${domain}
+    VIRTUAL_HOST: couchpotato.${hostname}.${domain}
     VIRTUAL_PORT: 5050
   volumes:
     - ${PATHMEDIA}:/data

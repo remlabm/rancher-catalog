@@ -3,11 +3,17 @@
   version: v0.1
   description: Plex Media Server
   questions:
+    - variable: "hostname"
+      description: "Hostname of the server."
+      label: "Hostname:"
+      required: true
+      default: "media1"
+      type: "string"
     - variable: "domain"
       description: "Domain of media service."
       label: "Domain:"
       required: true
-      default: "test.rm.media"
+      default: "rm.lan"
       type: "string"
     - variable: "host_label"
       description: "Host label where to run NFS service."
