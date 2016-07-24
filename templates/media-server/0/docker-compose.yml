@@ -31,9 +31,9 @@ plex:
     - ${PATHMEDIA}:/data
   volumes_from:
     -  plex-config
-  environment:
-    VIRTUAL_HOST: plex.${hostname}.${domain}
-    VIRTUAL_PORT: ${PLEX_PORT}
+#  environment:
+#    VIRTUAL_HOST: plex.${hostname}.${domain}
+#    VIRTUAL_PORT: ${PLEX_PORT}
   net: ${NET}
 plex-config:
   image: busybox
@@ -54,6 +54,8 @@ plex-proxy:
   tty: true
   image: remlabm/nginx-plex-proxy
   stdin_open: true
+plex-ext:
+  image: rancher/external-service
 
 sabnzbd:
   image: timhaak/sabnzbd
