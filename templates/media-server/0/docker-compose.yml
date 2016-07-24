@@ -54,6 +54,12 @@ plex-proxy:
   tty: true
   image: remlabm/nginx-plex-proxy
   stdin_open: true
+  command:
+    - /bin/sh
+    - -c
+    - "until (getent hosts api1); do echo 'waiting on plex-ext'; sleep 0.5; done &&
+      exec nginx"
+
 plex-ext:
   image: rancher/external-service
 
