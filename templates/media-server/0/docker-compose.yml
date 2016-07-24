@@ -89,7 +89,7 @@ sonarr:
   volumes_from:
     - sickbeard-config
   labels:
-    io.rancher.sidekicks: sabnzbd-config
+    io.rancher.sidekicks: sonarr-config
     io.rancher.scheduler.affinity:host_label: ${host_label}
 sonarr-config:
   image: busybox
