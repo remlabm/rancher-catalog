@@ -6,9 +6,6 @@ nginxproxy:
     - "/var/run/docker.sock:/tmp/docker.sock"
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
-    io.rancher.container.hostname_override: ${hostname}.${domain}
-  environment:
-    DEFAULT_HOST: plex.${hostname}.${domain}
 
 plex:
   image: timhaak/plex
